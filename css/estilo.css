@@ -1,0 +1,73 @@
+/* Move down content because we have a fixed navbar that is 3.5rem tall */
+body {
+  padding-top: 3.5rem;
+}
+
+.fundo{
+   
+  background: rgb(10, 20, 30);
+  text-align: center;
+  color: azure;
+}
+
+.container-form {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.btn-primary {
+  width: 60%;
+  border-radius: 100px;
+}
+
+.btn_base{
+  background: rgb(40, 130, 214);
+  color: azure;
+}
+
+.btn_base:hover{
+  background: azure;
+  color: rgb(40, 130, 214);
+}
+
+.btn_sair{
+  background: yellow;
+  color: black;
+  position: absolute;
+  /*left: 90px;  posiciona a 90px para a esquerda */ 
+  top: 93%; /* posiciona a 70px para baixo */
+}
+
+/* Esconde botão
+.voltar-hidden{
+  display: none;
+}
+*/
+
+.btn_sair:hover{
+  background: red;
+  color: aliceblue;
+}
+
+.logo_abrev{
+  float: center;
+  width: 40%;
+}
+
+.azure{
+  color: azure;
+  background: azure;
+}
+
+/* page-home {
+
+.btn_souProfissional{
+  background: silver;
+  color: darkgoldenrod;
+}
+
+.btn_souProfissional:hover{
+  color: silver !important;
+  background: darkgoldenrod !important;
+}
+} */
