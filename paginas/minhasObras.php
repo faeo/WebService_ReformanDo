@@ -1,5 +1,5 @@
-<h2>Formulário de Cadastro</h2>
-<form class="container-form text-center" action="?pg=processar_formulario" method="POST">
+<h2>Cadastrar Obra</h2>
+<form class="container-form text-center" action="?pg=cadastrarObra" method="POST">
 		<div class="form-group">
 			<span for="nomeObra">Nome da Obra</span>
 			<input class="form-control" type="text" name="nomeObra" id="nomeObra" />
@@ -13,15 +13,15 @@
 		<div class="form-group">
 			<span for="localObra">Localização</span>
 			<select class="form-control" name="localObra">
-				<option value="tres coracoes" selected>Três Corações</option> 
 				<option value="baependi" >Baependi</option>
+                <option value="cambuquira">Cambuquira</option> 
+				<option value="tres coracoes">Três Corações</option> 
 			</select>
 		</div>
 
 		<div class="form-group">
 			<span for="profObra">Tipo de Profissional</span>
 			<select class="form-control" name="profObra">
-				<option value="todos" selected>Todos</option> 
 				<option value="pintor" >Pintor</option>
 				<option value="pedreiro">Pedreiro</option>
 				<option value="encanador">Encanador</option> 
@@ -30,5 +30,5 @@
 			</select>
 		</div><br>
 
-		<input class="btn btn-primary" type="submit" value="Cadastrar" />
-</form>          
+		<input class="btn btn-primary" type="submit" name="cadastrar" value="Cadastrar" />
+</form> 

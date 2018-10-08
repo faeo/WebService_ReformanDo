@@ -5,12 +5,7 @@ ini_set('display_errors', 1);
 
 session_start();
 
-require_once "config.php";
-
-require "db/db.php";
-
-$db = new DB();
-
+require_once("configuracoes/conexao_bd.php");
 
 if(isset($_GET["pg"])){
   $pg = $_GET["pg"];
@@ -18,75 +13,100 @@ if(isset($_GET["pg"])){
 else{
   $pg = "inicio";
 }
-?>
 
+?>
 
 <!doctype html>
 <html lang="pt-br">
   <head>
+    <!-- Padrão caracteres -->
     <meta charset="utf-8">
+    <!-- Bootstrap Responsivo-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Rafael & Daniel">
+    <!-- Titulo -->
+    <title> ReformanDo - WebService </title>
+    <!-- Icone proximo ao titulo -->
     <link rel="icon" href="bootstrap-4.1.0/favicon.ico">
-    <title>WebService ReformanDo</title>
-    
-
-    <!-- Bootstrap core CSS -->
+    <!-- Bootstrap CSS -->
     <link href="bootstrap-4.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <script src="/webservice_reformando/view/assets/js/main.js"></script>
+    <!-- CSS na unha -->
+    <link href="css/estilo.css" rel="stylesheet">
+    <!-- JS -->
+    <script src="js/validar.js"></script> 
   </head>
 
+
   <body class="fundo">
+  <!-- HEADER --> 
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"> 
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item <?= ($pg == 'inicio')?'active':'' ?>">
+          <a class="nav-link" href="./">Início</a>
+        </li>
 
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-       
-
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item <?= ($pg == 'inicio')?'active':'' ?>">
-            <a class="nav-link" href="./">Início</a>
-          </li>
-          <li class="nav-item 
+        <li class="nav-item 
           <?php 
-
-            if($pg == 'form_cadastrar'){
-              echo 'active';
-            }
-
+             if($pg == 'minhasObras'){
+               echo 'active';
+             }
           ?>
           ">
-            <a class="nav-link" href="?pg=form_cadastrar">Minhas Obras</a>
-          </li>          
-          
-        </ul>
-      </div>
-    </nav>
+             <a class="nav-link" href="?pg=minhasObras">Minhas Obras</a>
 
-    <div class="logo_principal">
-      <img src="img/logo_principal.png" alt="logo-principal">
-    </div>
+          </li>
 
-    <main role="main">
-      <div class="container">      
-        <div class="row">
-          <div class="col">
-            
-            <?php include("paginas/".$pg.".php");  ?>
+          <li class="nav-item 
+          <?php 
+             if($pg == 'profissionais'){
+               echo 'active';
+             }
+          ?>
+          ">
+             <a class="nav-link" href="?pg=profissionais">Profissionais</a>
+             
+          </li>  
 
+          <li class="nav-item 
+          <?php 
+             if($pg == 'souProfissional'){
+               echo 'active';
+             }
+          ?>
+          ">
+             <a class="nav-link" href="?pg=souProfissional">Sou profissional</a>
+             
+          </li>        
+           
+         </ul>
+       </div>
+ </nav>
+ 
+     <div>
+       <img src="img/logo_principal.png" class="img-fluid" alt="Responsive image">
+     </div>
+ 
+     
+
+<!-- CONTEUDO -->     
+        <div class="container">
+          <div class="row justify-content-md-center text-center">
+            <div class="col">
+              <?php include("paginas/".$pg.".php"); ?>  
+            </div>
           </div>
         </div>
-      </div> <!-- /container -->
+      
+    
+<!-- RODAPÉ --> 
+    <br><br>
+    <div class="footer text-center">
+      <footer class="container">
+        <p>&copy; Projeto de TCC - Rafael & Daniel</p>
+      </footer>
+    </div>
 
-    </main>
-
-    <footer class="container">
-      <p>&copy; Projeto de TCC - Rafael & Daniel</p>
-    </footer>
-
-    <!-- Bootstrap core JavaScript
+     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
