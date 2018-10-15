@@ -3,7 +3,7 @@ if(isset($_GET['filtro'])){
 	$filtro = $_GET['filtro'];
 }
 else{
-	$filtro = FALSE;
+	$filtro = FALSE; // FALSE ja exibe a lista, TRUE somente com pesquisa
 }
 ?>
 
@@ -14,11 +14,6 @@ else{
 		<div class="form-group">
 			<span for = "buscaNome">Nome:</span>
 			<input class="form-control" type="text" name="buscaNome" placeholder="Digite o nome do profissional" value="">			
-		</div>
-
-        <div class="form-group">
-            <span for = "buscaApelido">Apelido:</span>
-			<input class="form-control" type="text" name="buscaApelido" placeholder="Digite o apelido do profissional" value="">		
 		</div>
 
         <div class="form-group">
@@ -44,7 +39,7 @@ else{
 		<div class="form-group">
             <span for = "buscaQualificacao">Qualificação:</span>
             	<select name="buscaQualificacao" class="form-control" id="buscaQualificacao">
-					<option value=""> - </option>
+					<option value="0"> 0 </option>
 					<option value="1"> 1 </option>
 					<option value="2"> 2 </option>
                     <option value="3"> 3 </option>
@@ -69,7 +64,7 @@ else{
 	
 	<?php	
        
-		$query = "SELECT * FROM reformando_banco.profissionais ".$filtro;		
+		$query = "SELECT * FROM reformando_banco.pessoas INNER JOIN reformando_banco.profissionais ON pessoas.idpessoas = profissionais.pessoas_idpessoas".$filtro;		
 		$sql = mysqli_query($link, $query);
 		$tr = 0;
 		// echo "<textarea>".$query."</textarea>";
@@ -100,7 +95,7 @@ else{
 			
 			}
 		} else {
-			echo "0 results";
+			echo "Nenhum resultado";
 		}		
 		
 	?>
