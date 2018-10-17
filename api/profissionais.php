@@ -11,7 +11,7 @@ function listarProfissionais(){
     $profissionais= array('Profissionais' => array() );
 
     foreach ($resultado as $key => $value) {
-		$dadosProfissionais['id pessoa'] = $value["idpessoas"];
+		$dadosProfissionais['id'] = $value["idpessoas"];
 		$dadosProfissionais['nome'] = $value["nome"];
 		$dadosProfissionais['apelido'] = $value["apelido"];
 		$dadosProfissionais['cpf'] = $value["cpf"];
@@ -85,6 +85,39 @@ function cadastrarProfissionais($dados){
 
 }
 
+function avaliarProfissionalPorId($dados ,$id){
+
+    $dados = json_decode($dados);
+
+    $conexao = conecta_bd();
+
+    $id = $dados->id;
+    $nome = $dados->nome;
+    $apelido = $dados->apelido;
+    $cpf = $dados->cpf;
+    $endereco = $dados->endereco;
+    $bairro= $dados->bairro;
+    $cidade= $dados->cidade;
+    $telefone = $dados->telefone;	
+    $profissao = $dados->profissao;
+    $qualificacao = $dados->qualificacao;
+
+    $sql = "UPDATE reformando_banco.profissionais
+    SET qualificacao = $qualificacao
+    WHERE pessoas_idpessoas = $id";
+    
+	$result = executar_sql($conexao, $sql);
+
+	if ($result) {
+		echo json_encode(array('code' => 1, 'msg' => 'Alterado com sucesso!'));
+	}
+	else{
+		echo json_encode(array('code' => 0, 'msg' => 'Erro!'));
+	}
+
+
+}
+
 if($acao == 'listarProfissionais'){
 
     listarProfissionais();
@@ -96,10 +129,15 @@ elseif($acao == 'cadastrarProfissionais'){
 	$dados = file_get_contents("php://input");
 
 	cadastrarProfissionais($dados);
-
-	
 }
 
+elseif($acao == 'avaliarProfissionalPorId'){
+
+    $id = $_GET['id'];
+	$dados = file_get_contents("php://input");
+
+	avaliarProfissionalPorId($dados, $id);
+}
 	
 
 ?>
