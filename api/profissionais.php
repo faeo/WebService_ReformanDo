@@ -38,10 +38,66 @@ function listarProfissionais(){
 
 }
 
+function cadastrarProfissionais($dados){
+
+    $dados = json_decode($dados);
+
+    $conexao = conecta_bd();
+
+    $nome = $dados->nome;
+    $apelido = $dados->apelido;
+    $cpf = $dados->cpf;
+    $endereco = $dados->endereco;
+    $bairro= $dados->bairro;
+    $cidade= $dados->cidade;
+    $telefone = $dados->telefone;	
+    $profissao = $dados->profissao;	
+    
+
+	$sql = "INSERT INTO reformando_banco.pessoas (nome, apelido, cpf, endereco, bairro, cidade, telefone) 
+         VALUES ('$nome','$apelido','$cpf', '$endereco', '$bairro', '$cidade', '$telefone')";	
+
+	$result = executar_sql($conexao, $sql);
+
+	if ($result) {
+
+        $sql1 = "SELECT idpessoas FROM reformando_banco.pessoas WHERE cpf = '$cpf'";
+
+        $id = executar_sql($conexao, $sql1);
+
+        $sql2 = "INSERT INTO profissionais (pessoas_idpessoas, profissao, qualificacao) 
+                VALUES ('$id', '$profissao', 0)";
+        
+        $result = executar_sql($conexao, $sql2);
+
+        if ($result) {
+
+	        echo json_encode(array('code' => 1, 'msg' => 'Sua Obra foi cadastrada com sucesso!'));
+    
+        }
+        else{
+            echo json_encode(array('code' => 0, 'msg' => 'Erro2!'));
+        }
+    }
+	else{
+		echo json_encode(array('code' => 0, 'msg' => 'Erro1!'));
+	}
+
+}
+
 if($acao == 'listarProfissionais'){
 
     listarProfissionais();
 
+}
+
+elseif($acao == 'cadastrarProfissionais'){	
+
+	$dados = file_get_contents("php://input");
+
+	cadastrarProfissionais($dados);
+
+	
 }
 
 	
