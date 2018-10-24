@@ -63,7 +63,11 @@ function cadastrarProfissionais($dados){
 
         $sql1 = "SELECT idpessoas FROM reformando_banco.pessoas WHERE cpf = '$cpf'";
 
-        $id = executar_sql($conexao, $sql1);
+        $result = executar_sql($conexao, $sql1);
+
+        $row = mysqli_fetch_assoc($result);
+
+        $id = $row['idpessoas'];
 
         $sql2 = "INSERT INTO profissionais (pessoas_idpessoas, profissao, qualificacao) 
                 VALUES ('$id', '$profissao', 0)";
@@ -72,7 +76,7 @@ function cadastrarProfissionais($dados){
 
         if ($result) {
 
-	        echo json_encode(array('code' => 1, 'msg' => 'Sua Obra foi cadastrada com sucesso!'));
+	        echo json_encode(array('code' => 1, 'msg' => 'Profissional cadastrado com sucesso!'));
     
         }
         else{
@@ -102,9 +106,7 @@ function avaliarProfissionalPorId($dados ,$id){
     $profissao = $dados->profissao;
     $qualificacao = $dados->qualificacao;
 
-    $sql = "UPDATE reformando_banco.profissionais
-    SET qualificacao = $qualificacao
-    WHERE pessoas_idpessoas = $id";
+    $sql = "UPDATE reformando_banco.profissionais SET qualificacao = $qualificacao WHERE pessoas_idpessoas = $id";
     
 	$result = executar_sql($conexao, $sql);
 
